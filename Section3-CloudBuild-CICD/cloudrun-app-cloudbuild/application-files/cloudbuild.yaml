@@ -1,11 +1,11 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/udemy-mlops-395416/demo-flask-app:$COMMIT_SHA', '.']
+  args: ['build', '-t', 'gcr.io/mlops-trial1/demo-flask-app', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/udemy-mlops-395416/demo-flask-app:$COMMIT_SHA']
+  args: ['push', 'gcr.io/mlops-trial1/demo-flask-app']
 
-- name: 'gcr.io/udemy-mlops-395416/demo-flask-app:$COMMIT_SHA'
+- name: 'gcr.io/mlops-trial1/demo-flask-app'
   entrypoint: 'bash'
   args:
    - '-c'
@@ -17,14 +17,14 @@ steps:
   args:
    - 'run'
    - 'deploy'
-   - 'py-bq-load'
+   - 'demo-flask-app'
    - '--image'
-   - 'gcr.io/udemy-mlops-395416/demo-flask-app:$COMMIT_SHA'
+   - 'gcr.io/mlops-trial1/demo-flask-app'
    - '--region'
    - 'us-central1'
    - '--allow-unauthenticated'
 images:
-- 'gcr.io/udemy-mlops-395416/demo-flask-app:$COMMIT_SHA'
+- 'gcr.io/mlops-trial1/demo-flask-app'
 
 options:
   logging: CLOUD_LOGGING_ONLY
